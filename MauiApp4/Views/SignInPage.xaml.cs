@@ -1,143 +1,17 @@
-﻿using MauiApp4.Helpers;
-using MauiApp4.Services;
+﻿using MauiApp4.ViewModels;
+
 namespace MauiApp4.Views;
 
 public partial class SignInPage : ContentPage
 {
-    private bool _debugMode => true;
-    private string _userName;
-    private string _password;
-    private string _messageText;
-    private bool _entryAsPassword;
-    private DBMokup _db;
-    private bool _isSignInMessageVisible;
-    private Color _messageColor;
-
-    public string MessageText
-    {
-        get { return _messageText; }
-        set
-        {
-            _messageText = value;
-            OnPropertyChanged();
-        }
-    }
-    public bool IsSignInButtonEnabled
-    {
-        get => !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));
-    }
-
-
-    public bool EntryAsPassword
-    {
-        get { return _entryAsPassword; }
-        set
-        {
-            if (value != _entryAsPassword)
-            {
-                _entryAsPassword = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    public string UserName
-    {
-        get { return _userName; }
-        set
-        {
-            if (value != _userName)
-            {
-                _userName = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(IsSignInButtonEnabled));
-            }
-        }
-    }
-
-    public string UserPassword
-    {
-        get { return _password; }
-        set
-        {
-            if (value != _password)
-            {
-                _password = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(IsSignInButtonEnabled));
-            }
-        }
-    }
-    public bool IsSignInMessageVisible
-    {
-        get { return _isSignInMessageVisible; }
-        set
-        {
-            if (value != _isSignInMessageVisible)
-            {
-                _isSignInMessageVisible = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    public Color MessageColor
-    {
-        get { return _messageColor; }
-        set
-        {
-            if (_messageColor != value)
-            {
-                _messageColor = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+  
     public SignInPage()
     {
         InitializeComponent();
-        BindingContext = this;
-        EntryAsPassword = true;
-        IsSignInMessageVisible = false;
-        _db = new DBMokup();
-
-        if (_debugMode)
-        {
-            UserName = "admin@mail.com";
-            UserPassword = "admin";
+        BindingContext = new SignInPageViewModel();
+       
         }
        
     }
 
-    public void TogglePassordButton_Clicked(object sender, EventArgs e)
-    {
-        var visBtn = sender as Button;
-        //if (PasswordEntry.IsPassword)
-        if (!EntryAsPassword)
-            visBtn!.Text = FontHelper.CLOSED_EYE_ICON;
-        else
-            visBtn!.Text = FontHelper.OPEN_EYE_ICON;
-
-        //PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
-        EntryAsPassword = !EntryAsPassword;
-
-    }
-    private void OnSignInButtonClick(object sender, EventArgs e)
-    {
-
-        IsSignInMessageVisible = true;
-        if (_db.isExist(UserName, UserPassword))
-        {
-            MessageText = "ההתחברות הצליחה";
-           MessageColor = Colors.Green;
-         
-            //Navigate to MainPage
-        }
-        else
-        {
-            MessageText = "שגיאת התחברות";
-            MessageColor = Colors.Red;
-          
-            // Handle sign-in logic here
-        }
-    }
-}
-
+   

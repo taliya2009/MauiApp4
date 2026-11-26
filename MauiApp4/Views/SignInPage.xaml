@@ -3,9 +3,9 @@
     x:Class="MauiApp4.Views.SignInPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:MauiApp4.Views"
-    Title="SignInPage"
-    x:DataType="views:SignInPage">
+    xmlns:views="clr-namespace:MauiApp4.ViewModels"
+    x:DataType="views:SignInPageViewModel"
+    Title="SignInPage">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -55,11 +55,11 @@
                     Margin="5,0,0,0"
                     Padding="0"
                     BackgroundColor="Transparent"
-                    Clicked="TogglePassordButton_Clicked"
+                    Command="{Binding ShowPasswordCommand}"
                     FontFamily="MaterialIcons"
                     FontSize="24"
                     HorizontalOptions="End"
-                    Text="&#xe8f4;"
+                    Text="{Binding IconPasswordButton}"
                     TextColor="White"
                     VerticalOptions="Center" />
             </Grid>
