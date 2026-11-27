@@ -131,7 +131,7 @@ namespace MauiApp4.ViewModels
             IconPasswordButton = FontHelper.OPEN_EYE_ICON;
 
             _db = new DBMokup();
-            ShowPasswordCommand = new Command(TogglePassordButton_Clicked);
+            ShowPasswordCommand = new Command(TogglePasswordButton);
             SignInCommand = new Command(OnSignInButtonClick);
 
             if (_debugMode)
@@ -141,7 +141,7 @@ namespace MauiApp4.ViewModels
             }
 
         }
-        public void TogglePassordButton_Clicked()
+        public void TogglePasswordButton()
         {
             if (!EntryAsPassword)
                 IconPasswordButton = FontHelper.OPEN_EYE_ICON;

@@ -2,7 +2,7 @@
 {
     public partial class App : Application
     {
-        public App()
+        public App() 
         {
             InitializeComponent();
         }
@@ -10,7 +10,7 @@
         protected override Window CreateWindow(IActivationState? activationState)
         {
             //  return new Window(new AppShell());
-            return new Window(new Views.SignUpPage());
+            return new Window(new Views.SignUpView());
         }
     }
 }

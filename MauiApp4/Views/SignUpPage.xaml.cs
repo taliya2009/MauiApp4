@@ -1,6 +1,6 @@
 
 using MauiApp4.Helpers;
-using System.ComponentModel.DataAnnotations;
+//using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
 
 namespace MauiApp4.Views;
@@ -107,7 +107,7 @@ public partial class SignUpPage : ContentPage
         InitializeComponent();
         BindingContext = this;
         _entryAsPassword = true;
-        _passwordIconCode = FontHelper.CLOSED_EYE_ICON;
+        PasswordIconCode = FontHelper.OPEN_EYE_ICON;
         ShowPasswordCommand = new Command(TogglePasswordButton);
         SignInCommand = new Command(SignUp, Validate);
     }

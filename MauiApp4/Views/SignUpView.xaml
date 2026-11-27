@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp4.Views.SignUpView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:views="clr-namespace:MauiApp4.ViewModels"
+    x:DataType="views:SignUpViewModel">
+
+
+    <ContentPage.Resources>
+        <Style x:Key ="InvalidEntryStyle" TargetType ="Entry">
+            <Setter Property ="TextColor" Value = "Red"/>
+        </Style>
+        <Style x:Key ="ValidEntryStyle" TargetType ="Entry">
+            <Setter Property ="TextColor" Value ="Green"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <Grid RowDefinitions="1.5*,3*,1*">
+
+            <!--  1. Circular User Avatar  -->
+            <Border
+                Margin="0,0,0,8"
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                Stroke="#10B981"
+                StrokeShape="RoundRectangle 75"
+                StrokeThickness="2"
+                WidthRequest="150">
+
+                <ImageButton Aspect="AspectFill" Source="stich.png"/>
+            </Border>
+
+            <VerticalStackLayout
+                Grid.Row="1"
+                Padding="20"
+                Spacing="12"
+                VerticalOptions="Center">
+
+                <!--  2 & 3. First Name & Last Name Side-by-Side  -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            Text="First Name"
+                            TextColor="#4B5563"/>
+                        <Border Stroke="#D1D5DB" StrokeShape="RoundRectangle 8">
+                            <Entry Placeholder="Moshe"
+                            Text="{Binding FirstName}"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            Text="Last Name"
+                            TextColor="#4B5563"/>
+                        <Border Stroke="#D1D5DB" StrokeShape="RoundRectangle 8">
+                            <Entry Placeholder="Rabbeinu"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!--  4. Email  -->
+                <VerticalStackLayout Spacing="4">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        Text="Email"
+                        TextColor="#4B5563"/>
+                    <Border Stroke="#D1D5DB" StrokeShape="RoundRectangle 8">
+                        <Entry Keyboard="Email" Placeholder="admin@israel.co.il">
+                            
+                       <Entry.Behaviors>
+                      <toolkit:EmailValidationBehavior
+                       InvalidStyle ="{StaticResource InvalidEntryStyle}"
+                       ValidStyle ="{StaticResource ValidEntryStyle}"
+                       Flags ="ValidateOnValueChanged"/>
+                      </Entry.Behaviors>
+                    </Entry>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!--  5. Password  -->
+                <VerticalStackLayout Spacing="4">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        Text="Password"
+                        TextColor="#4B5563"/>
+                    <Border Stroke="#D1D5DB" StrokeShape="RoundRectangle 8">
+                        <Entry IsPassword="True" Placeholder="••••••••"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!--  6. Mobile  -->
+                <VerticalStackLayout Spacing="4">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        Text="Mobile Number"
+                        TextColor="#4B5563"/>
+                    <Border Stroke="#D1D5DB" StrokeShape="RoundRectangle 8">
+                        <Entry Keyboard="Telephone" Placeholder="0525550123"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!--  10. SignUp Error Message  -->
+                <Label
+                    x:Name="ErrorLabel"
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    IsVisible="true"
+                    Text="Error: This email is already registered."
+                    TextColor="#DC2626"/>
+
+                <!--  7. SignUp Button  -->
+                <Button
+                    Margin="0,8,0,0"
+                    CornerRadius="8"
+                    FontAttributes="Bold"
+                    HeightRequest="48"
+                    IsEnabled="False"
+                    Text="Sign Up"
+                    TextColor="White"/>
+
+                <!--  8 & 9. Have an account? + SignIn  -->
+                <HorizontalStackLayout
+                    Margin="0,4,0,0"
+                    HorizontalOptions="Center"
+                    Spacing="5">
+                    <Label
+                        FontSize="14"
+                        Text="Have an account?"
+                        VerticalOptions="Center"/>
+                    <Button
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HeightRequest="30"
+                        Text="Sign In"
+                        TextColor="#10B981"/>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>
